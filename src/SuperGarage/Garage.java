@@ -10,7 +10,7 @@ public class Garage {
 
     List<Fordon> parkeradeBilar;
 
-    public Fordon createFordon(String typ, String regNr) {
+    public Fordon checkaInFordon(String typ, String regNr) {
         if (typ.equalsIgnoreCase("Bil")) {
             return new Bil(regNr);
         }
