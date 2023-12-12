@@ -71,7 +71,7 @@ public class Garage {
 
     public void skickaFaktura() {
         System.out.println("Ditt totalpris blir: " + totalPris + "kronor.");
-        System.out.println("Fakturan skickas till fordonsägarens hemadress.");
+        System.out.println("Fakturan skickas till fordonsägarens hemadress, välkommen åter.");
     }
 
     public void skrivUtIncheckadeBilar() {
