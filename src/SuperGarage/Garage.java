@@ -4,10 +4,11 @@ import java.util.List;
 
 public class Garage {
 
-    private int antalParkeringsplatser;
+    private int antalParkeringsplatser = 20;
 
     private int antalParkeradeFordon;
 
+    private boolean finnsPlats = false;
     List<Fordon> parkeradeBilar;
 
     public Fordon checkaInFordon(String typ, String regNr) {
@@ -24,5 +25,12 @@ public class Garage {
             return new Motorcykel(regNr);
         }
         return null;
+    }
+
+    public boolean kontrolleraPlats() {
+        if (antalParkeradeFordon < antalParkeringsplatser){
+            return true;
+        } else
+            return false;
     }
 }
