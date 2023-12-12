@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Databas {
-    private List<Fordon> parkeradeBilar = new ArrayList<>();
+    private final List<Fordon> parkeradeBilar = new ArrayList<>();
 
     public void saveFordon(List<Fordon> vehicles) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/SuperGarage/bilar.txt"))) {
@@ -25,19 +25,22 @@ public class Databas {
             String line;
             while ((line = reader.readLine()) != null) {
 
-                String[] parts = line.split(", ");
+                String[] tempDelar = line.split(", ");
 
-                String fordonsTyp = parts[0];
-                String regNummer = parts[1];
-                LocalDate parkeringsDatum = LocalDate.parse(parts[2]); //Kommer vi behöva denna?? Ändrat så vi tar in local date i konstrukotrn istället
+                String fordonsTyp = tempDelar[0];
+                String regNummer = tempDelar[1];
+                LocalDate parkeringsDatum = LocalDate.parse(tempDelar[2]);
 
                 if (fordonsTyp.equals("Bil")) {
                     parkeradeBilar.add(new Bil(regNummer, parkeringsDatum));
-                }if (fordonsTyp.equals("Båt")) {
+                }
+                if (fordonsTyp.equals("Båt")) {
                     parkeradeBilar.add(new Bat(regNummer, parkeringsDatum));
-                }if (fordonsTyp.equals("Moped")) {
+                }
+                if (fordonsTyp.equals("Moped")) {
                     parkeradeBilar.add(new Moped(regNummer, parkeringsDatum));
-                }if (fordonsTyp.equals("Motorcykel")) {
+                }
+                if (fordonsTyp.equals("Motorcykel")) {
                     parkeradeBilar.add(new Motorcykel(regNummer, parkeringsDatum));
                 }
 

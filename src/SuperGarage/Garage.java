@@ -74,7 +74,7 @@ public class Garage {
 
     public int kontrolleraParkeringstid(Fordon f) {
         LocalDate lD = LocalDate.now();
-        Period periods = Period.between(lD, f.getDate());
+        Period periods = Period.between(f.getDate(), lD);
         return periods.getDays();
     }
 
@@ -99,10 +99,10 @@ public class Garage {
         } else
             return false;
     }
-    public List<Fordon> getParkeradeBilar() {
+    public List<Fordon> getParkeradeBilar() { //La till dessa
         return parkeradeBilar;
     }
-    public void setParkeradeBilar(List<Fordon> parkeradeBilar) {
+    public void setParkeradeBilar(List<Fordon> parkeradeBilar) { //La till dessa
         this.parkeradeBilar = parkeradeBilar;
     }
 }
