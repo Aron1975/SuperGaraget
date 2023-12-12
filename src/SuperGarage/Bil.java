@@ -24,7 +24,7 @@ public class Bil implements Fordon{
 
     @Override
     public String toString(){
-        return ("Bil, " + this.regNr);
+        return ("Bil, " + this.regNr + ", " + incheckningstid);
     }
 
     @Override

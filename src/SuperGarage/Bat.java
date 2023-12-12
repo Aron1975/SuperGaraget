@@ -24,7 +24,7 @@ public class Bat implements Fordon{
 
     @Override
     public String toString(){
-        return ("Båt, " + this.regNr);
+        return ("Båt, " + this.regNr + ", " + incheckningstid);
     }
 
     @Override

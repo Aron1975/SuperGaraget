@@ -24,7 +24,7 @@ public class Moped implements Fordon{
 
     @Override
     public String toString(){
-        return ("Moped, " + this.regNr);
+        return ("Moped, " + this.regNr + ", " + incheckningstid);
     }
 
     @Override

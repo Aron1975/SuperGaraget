@@ -24,7 +24,7 @@ public class Motorcykel implements Fordon{
 
     @Override
     public String toString(){
-        return ("Motorcykel, " + this.regNr);
+        return ("Motorcykel, " + this.regNr + ", " + incheckningstid);
     }
 
     @Override
