@@ -1,5 +1,6 @@
 package SuperGarage;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Motorcykel implements Fordon{
@@ -9,7 +10,7 @@ public class Motorcykel implements Fordon{
 
     double pris = 50;
 
-    LocalDateTime incheckningstid;
+    LocalDate incheckningstid;
 
     public Motorcykel(String regNr) {
         this.regNr = regNr;
@@ -28,6 +29,19 @@ public class Motorcykel implements Fordon{
 
     @Override
     public void setDate(){
-        this.incheckningstid = LocalDateTime.now();
+        this.incheckningstid = LocalDate.now();
+    }
+
+    @Override
+    public LocalDate getDate(){
+        return incheckningstid;
+    }
+
+    public String getRegNr(){
+        return this.regNr;
+    }
+
+    public double getPrice(){
+        return this.pris;
     }
 }

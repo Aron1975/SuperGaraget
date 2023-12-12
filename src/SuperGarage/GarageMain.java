@@ -4,6 +4,7 @@ public class GarageMain {
 
     public static void main(String[] args) {
 
+
         Garage superGarage = new Garage();
         Fordon fordon1 = superGarage.checkaInFordon("bil", "PPP100");
         Fordon fordon2 = superGarage.checkaInFordon("båt", "Darling");

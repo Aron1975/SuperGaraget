@@ -1,5 +1,6 @@
 package SuperGarage;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Bat implements Fordon{
@@ -9,7 +10,7 @@ public class Bat implements Fordon{
 
     double pris = 100;
 
-    LocalDateTime incheckningstid;
+    LocalDate incheckningstid;
 
     public Bat(String regNr) {
         this.regNr = regNr;
@@ -28,6 +29,19 @@ public class Bat implements Fordon{
 
     @Override
     public void setDate(){
-        this.incheckningstid = LocalDateTime.now();
+        this.incheckningstid = LocalDate.now();
+    }
+
+    @Override
+    public LocalDate getDate(){
+        return incheckningstid;
+    }
+
+    public String getRegNr(){
+        return this.regNr;
+    }
+
+    public double getPrice(){
+        return this.pris;
     }
 }
