@@ -12,9 +12,9 @@ public class Motorcykel implements Fordon{
 
     LocalDate incheckningstid;
 
-    public Motorcykel(String regNr) {
+    public Motorcykel(String regNr, LocalDate incheckningstid) {
         this.regNr = regNr;
-        setDate();
+        this.incheckningstid = incheckningstid;
     }
 
     @Override
@@ -25,11 +25,6 @@ public class Motorcykel implements Fordon{
     @Override
     public String toString(){
         return ("Motorcykel, " + this.regNr + ", " + incheckningstid);
-    }
-
-    @Override
-    public void setDate(){
-        this.incheckningstid = LocalDate.now();
     }
 
     @Override

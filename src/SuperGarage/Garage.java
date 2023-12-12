@@ -16,25 +16,25 @@ public class Garage {
 
     private boolean finnsPlats = false;
     private double totalPris = 0;
-    List<Fordon> parkeradeBilar = new ArrayList<>();
+    private List<Fordon> parkeradeBilar = new ArrayList<>();
 
-    public Fordon checkaInFordon(String typ, String regNr) {
+    public Fordon checkaInFordon(String typ, String regNr, LocalDate parkeringsDatum) {
 
         Scanner scan = new Scanner(System.in);
 
         Fordon f = null;
         regNr = regNr.toUpperCase().trim();
         if (typ.equalsIgnoreCase("Bil")) {
-            f = new Bil(regNr);
+            f = new Bil(regNr, parkeringsDatum);
         }
         if (typ.equalsIgnoreCase("Båt")) {
-            f = new Bat(regNr);
+            f = new Bat(regNr, parkeringsDatum);
         }
         if (typ.equalsIgnoreCase("Moped")) {
-            f = new Moped(regNr);
+            f = new Moped(regNr, parkeringsDatum);
         }
         if (typ.equalsIgnoreCase("Motorcykel")) {
-            f = new Motorcykel(regNr);
+            f = new Motorcykel(regNr, parkeringsDatum);
         }
 
 
@@ -52,8 +52,6 @@ public class Garage {
     }
 
     public void checkaUtFordon(String regNr) {
-
-        LocalDateTime nutid = LocalDateTime.now();
         int bilPaPlats = hittaFordon(regNr);
         if (bilPaPlats == -1) {
             System.out.println("Bilen är inte parkerad här");
@@ -100,5 +98,11 @@ public class Garage {
             return true;
         } else
             return false;
+    }
+    public List<Fordon> getParkeradeBilar() {
+        return parkeradeBilar;
+    }
+    public void setParkeradeBilar(List<Fordon> parkeradeBilar) {
+        this.parkeradeBilar = parkeradeBilar;
     }
 }

@@ -12,9 +12,9 @@ public class Bil implements Fordon{
 
     LocalDate incheckningstid;
 
-    public Bil(String regNr) {
+    public Bil(String regNr, LocalDate incheckningstid) {
         this.regNr = regNr;
-        setDate();
+        this.incheckningstid = incheckningstid;
     }
 
     @Override
@@ -25,11 +25,6 @@ public class Bil implements Fordon{
     @Override
     public String toString(){
         return ("Bil, " + this.regNr + ", " + incheckningstid);
-    }
-
-    @Override
-    public void setDate(){
-        this.incheckningstid = LocalDate.now();
     }
 
     @Override

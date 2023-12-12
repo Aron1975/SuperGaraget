@@ -12,9 +12,9 @@ public class Bat implements Fordon{
 
     LocalDate incheckningstid;
 
-    public Bat(String regNr) {
+    public Bat(String regNr, LocalDate incheckningstid) {
         this.regNr = regNr;
-        setDate();
+        this.incheckningstid = incheckningstid;
     }
 
     @Override
@@ -25,11 +25,6 @@ public class Bat implements Fordon{
     @Override
     public String toString(){
         return ("Båt, " + this.regNr + ", " + incheckningstid);
-    }
-
-    @Override
-    public void setDate(){
-        this.incheckningstid = LocalDate.now();
     }
 
     @Override

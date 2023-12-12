@@ -7,8 +7,6 @@ public interface Fordon {
     public void skrivUtPrisPerDag();
     public String toString();
 
-    public void setDate();
-
     public LocalDate getDate();
 
     public String getRegNr();

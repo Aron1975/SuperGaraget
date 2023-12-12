@@ -12,9 +12,9 @@ public class Moped implements Fordon{
 
     LocalDate incheckningstid;
 
-    public Moped(String regNr) {
+    public Moped(String regNr, LocalDate incheckningstid) {
         this.regNr = regNr;
-        setDate();
+        this.incheckningstid = incheckningstid;
     }
 
     @Override
@@ -25,11 +25,6 @@ public class Moped implements Fordon{
     @Override
     public String toString(){
         return ("Moped, " + this.regNr + ", " + incheckningstid);
-    }
-
-    @Override
-    public void setDate(){
-        this.incheckningstid = LocalDate.now();
     }
 
     @Override
