@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 public class Bil implements Fordon{
 
     String regNr;
+    String owner;
 
     double pris = 70;
 
@@ -18,6 +19,11 @@ public class Bil implements Fordon{
     @Override
     public void skrivUtPrisPerDag() {
         System.out.println("Bil: " + this.pris + "kr/dag");
+    }
+
+    @Override
+    public String toString(){
+        return ("Bil, " + this.regNr);
     }
 
     @Override

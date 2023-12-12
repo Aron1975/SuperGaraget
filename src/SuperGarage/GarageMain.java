@@ -14,5 +14,8 @@ public class GarageMain {
         fordon2.skrivUtPrisPerDag();
         fordon3.skrivUtPrisPerDag();
         fordon4.skrivUtPrisPerDag();
+        System.out.println(fordon1 instanceof Bat);
+        System.out.println(fordon2.toString());
+        System.out.println(fordon3.toString());
     }
 }
