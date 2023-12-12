@@ -8,10 +8,10 @@ import java.util.List;
 public class Databas {
     private final List<Fordon> parkeradeBilar = new ArrayList<>();
 
-    public void saveFordon(List<Fordon> vehicles) {
+    public void saveFordon(List<Fordon> parkeradeF) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/SuperGarage/bilar.txt"))) {
-            for (Fordon parkeradeB : vehicles) {
-                writer.write(parkeradeB.toString());
+            for (Fordon fordon : parkeradeF) {
+                writer.write(fordon.toString());
                 writer.newLine();
             }
         } catch (IOException e) {
