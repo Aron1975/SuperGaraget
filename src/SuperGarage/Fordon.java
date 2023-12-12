@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface Fordon {
-
     public void skrivUtPrisPerDag();
     public String toString();
 

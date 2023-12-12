@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Garage {
 
@@ -18,32 +19,46 @@ public class Garage {
     List<Fordon> parkeradeBilar = new ArrayList<>();
 
     public Fordon checkaInFordon(String typ, String regNr) {
+
+        Scanner scan = new Scanner(System.in);
+
         Fordon f = null;
+        regNr = regNr.toUpperCase().trim();
         if (typ.equalsIgnoreCase("Bil")) {
             f = new Bil(regNr);
-            return new Bil(regNr);
         }
         if (typ.equalsIgnoreCase("Båt")) {
             f = new Bat(regNr);
-            return new Bat(regNr);
         }
         if (typ.equalsIgnoreCase("Moped")) {
             f = new Moped(regNr);
-            return new Moped(regNr);
         }
         if (typ.equalsIgnoreCase("Motorcykel")) {
             f = new Motorcykel(regNr);
-            return new Motorcykel(regNr);
         }
+
+
+        System.out.println("Pris: " + f.getPrice() + " kr per dag.\n Skriv nej för avbryt");
+        String inputUser =  scan.nextLine().trim().toLowerCase();
+
+        if (inputUser.equals("nej")) {
+            System.out.println("Adjö");
+            System.exit(0);
+        }
+
         parkeradeBilar.add(f);
         antalParkeradeFordon++;
-        return null;
+        return f;
     }
 
     public void checkaUtFordon(String regNr) {
 
         LocalDateTime nutid = LocalDateTime.now();
         int bilPaPlats = hittaFordon(regNr);
+        if (bilPaPlats == -1) {
+            System.out.println("Bilen är inte parkerad här");
+            System.exit(0);
+        }
         totalPris = evaluatePrice(parkeradeBilar.get(bilPaPlats), kontrolleraParkeringstid(parkeradeBilar.get(bilPaPlats)));
         parkeradeBilar.remove(bilPaPlats);
     }
@@ -51,7 +66,7 @@ public class Garage {
     public int hittaFordon(String regNr) {
         int counter = 0;
         for (Fordon f : parkeradeBilar) {
-            if (f.getRegNr().equals(regNr)) {
+            if (f.getRegNr().equals(regNr.toUpperCase())) {
                 return counter;
             }
             counter++;

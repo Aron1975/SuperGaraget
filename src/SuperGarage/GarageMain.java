@@ -6,21 +6,32 @@ public class GarageMain {
     Garage garage = new Garage();
     Scanner scan = new Scanner(System.in);
 
+
     public GarageMain() {
+
+       // garage.checkaInFordon("Bil", "ABC123");
+       // garage.checkaInFordon("Båt", "APA139");
+       // garage.checkaInFordon("Båt", "APA139");
+
         System.out.println("Välkommen till Super Garaget!");
         System.out.println("Om något inte fungerar kontakta oss på Supergaraget AB: 076 123 45 67");
-        kundEllerAnställd();
-        if (kundEllerAnställd().equals("kund")) {
+
+        String s = kundEllerAnställd();
+        if (s.equals("1")) {
             kund();
-        } else if (kundEllerAnställd().equals("anställd")) {
+        } else if (s.equals("2")) {
             anställd();
         } else {
             System.out.println("Om du inte är anställd eller kund, vänligen lämna området.");
         }
     }
 
+    public static void main(String[] args) {
+        GarageMain garageMain = new GarageMain();
+    }
+
     public String kundEllerAnställd() {
-        System.out.println("Är du anställd eller kund? (skriv kund eller anställd)");
+        System.out.println("Är du anställd eller kund? Skriv 1 för kund och 2 för anställd");
         String aK = scan.nextLine().trim().toLowerCase();
         return aK;
     }
@@ -36,14 +47,18 @@ public class GarageMain {
                 System.out.println("Vad har du för fordonstyp?");
                 String fordonsTyp = scan.nextLine();
 
-                Fordon fordon = garage.checkaInFordon(fordonsTyp, regNr);
+                if (garage.checkaInFordon(fordonsTyp, regNr) == null) {
+                    System.out.println("Fordonet får inte parkera här.");
+                    System.exit(0);
+                }
+
 
                 System.out.println("Välkommen in och parkera!");
 
             } else {
                 System.out.println("Garaget är fullt, vänligen återkom i ett senare skede.");
             }
-        } else if (inEllerUtFråga.equals("ut")){
+        } else if (inEllerUtFråga.equals("ut")) {
             System.out.println("Vad har du för registreringsnummer?");
             String regNr = scan.nextLine();
             garage.checkaUtFordon(regNr);
@@ -52,22 +67,26 @@ public class GarageMain {
     }
 
     public void anställd() {
-        System.out.println();
-    }
+        System.out.println("Vad vill du göra?\nAnge 1 för att söka i databas eller\n2 för Checka in eller checka ut en kund" +
+                "\n3 för att skriva ut alla fordon");
+        String sökEllerCheck = scan.nextLine().trim().toLowerCase();
 
-    public static void main(String[] args) {
+        if (sökEllerCheck.equals("1")) {
+            System.out.println("Vilket reg nr?");
+            String regNr = scan.nextLine().trim().toUpperCase();
+            int parkeringsPlats = garage.hittaFordon(regNr);
+            if (parkeringsPlats == -1) {
+                System.out.println("Bilen är inte parkerad här");
+                System.exit(0);
+            }
+            System.out.println(garage.parkeradeBilar.get(parkeringsPlats).toString());
+        } else if (sökEllerCheck.equals("2")) {
+            kund();
+        } else if (sökEllerCheck.equals("3")) {
+            garage.skrivUtIncheckadeBilar();
+        } else {
+            System.out.println("Adjöken");
+        }
 
-        Garage superGarage = new Garage();
-        Fordon fordon1 = superGarage.checkaInFordon("bil", "PPP100");
-        Fordon fordon2 = superGarage.checkaInFordon("båt", "Darling");
-        Fordon fordon3 = superGarage.checkaInFordon("Motorcykel", "ZZM600");
-        Fordon fordon4 = superGarage.checkaInFordon("Moped", "BRR050");
-        fordon1.skrivUtPrisPerDag();
-        fordon2.skrivUtPrisPerDag();
-        fordon3.skrivUtPrisPerDag();
-        fordon4.skrivUtPrisPerDag();
-        System.out.println(fordon1 instanceof Bat);
-        System.out.println(fordon2.toString());
-        System.out.println(fordon3.toString());
     }
 }
