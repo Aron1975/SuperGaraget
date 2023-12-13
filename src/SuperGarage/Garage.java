@@ -16,6 +16,7 @@ public class Garage {
 
     private boolean finnsPlats = false;
     private double totalPris = 0;
+    private int maxTidParkering = 365;
     private List<Fordon> parkeradeBilar = new ArrayList<>();
 
     public Fordon checkaInFordon(String typ, String regNr, LocalDate parkeringsDatum) {
@@ -39,7 +40,7 @@ public class Garage {
 
 
         System.out.println("Pris: " + f.getPrice() + " kr per dag.\n Skriv nej för avbryt");
-        String inputUser =  scan.nextLine().trim().toLowerCase();
+        String inputUser = scan.nextLine().trim().toLowerCase();
 
         if (inputUser.equals("nej")) {
             System.out.println("Adjö");
@@ -99,10 +100,36 @@ public class Garage {
         } else
             return false;
     }
+
+    public void antalPlatserLediga() {
+        int ledigaPlatser = antalParkeringsplatser - antalParkeradeFordon;
+        System.out.println("Antal lediga platser i Garaget: " + ledigaPlatser);
+        System.out.println(" ");
+        ;
+    }
+
+
     public List<Fordon> getParkeradeBilar() { //La till dessa
         return parkeradeBilar;
     }
+
     public void setParkeradeBilar(List<Fordon> parkeradeBilar) { //La till dessa
         this.parkeradeBilar = parkeradeBilar;
+    }
+
+    public int getMaxTidParkering() {
+        return maxTidParkering;
+    }
+
+    public void kontrollerBegränsningParkeradeDagar() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Vilken fordon vill du kontrollera? (Skriv in registreringsnummer)");
+        String svar = scan.nextLine();
+        int i = hittaFordon(svar);
+        if ( i != -1) {
+            int f = kontrolleraParkeringstid(getParkeradeBilar().get(i));
+            System.out.println("Kunden har parkerat: " + f + " dagar.");
+            System.out.println("Kunden får stå parkerad totalt: " + (getMaxTidParkering() - f) + " dagar till.");
+        }
     }
 }

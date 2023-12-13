@@ -1,5 +1,6 @@
 package SuperGarage;
 
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -12,13 +13,8 @@ public class GarageMain {
 
     public GarageMain() {
         laddaFordon();
-        //garage.checkaInFordon("Bil", "ABC123", parkeringsDatum); //Skickar in parkeringsDatum
-       // garage.checkaInFordon("Båt", "APA139", parkeringsDatum);
-       // garage.checkaInFordon("Båt", "APA139", parkeringsDatum);
-
-        System.out.println("Välkommen till Super Garaget!");
-        System.out.println("Om något inte fungerar kontakta oss på Supergaraget AB: 076 123 45 67");
-
+        välkommenOchInfo();
+        garage.antalPlatserLediga();
         String s = kundEllerAnställd();
         if (s.equals("1")) {
             kund();
@@ -70,8 +66,8 @@ public class GarageMain {
     }
 
     public void anställd() {
-        System.out.println("Vad vill du göra?\nAnge 1 för att söka i databas eller\n2 för Checka in eller checka ut en kund" +
-                "\n3 för att skriva ut alla fordon");
+        System.out.println("Vad vill du göra? Ange: \n- 1 för att söka i databas eller\n- 2 för Checka in eller checka ut en kund" +
+                "\n- 3 för att skriva ut alla fordon" + " \n- 4 för att kontrollera parkeringstid.");
         String sökEllerCheck = scan.nextLine().trim().toLowerCase();
 
         if (sökEllerCheck.equals("1")) {
@@ -87,17 +83,26 @@ public class GarageMain {
             kund();
         } else if (sökEllerCheck.equals("3")) {
             garage.skrivUtIncheckadeBilar();
+        } else if (sökEllerCheck.equals("4")) {
+            garage.kontrollerBegränsningParkeradeDagar();
         } else {
             System.out.println("Adjöken");
         }
 
     }
 
-    public void laddaFordon(){
+    public void välkommenOchInfo() {
+        System.out.println("Välkommen till Super Garaget!");
+        System.out.println("Om något inte fungerar kontakta oss på Supergaraget AB: 076 123 45 67" + "\n" +
+                "\n Garaget är öppet: Måndag-Söndag 00:00 - 23:59." +
+                "\n - Obemannat 16:00 - 23:59.");
+    }
+
+    public void laddaFordon() {
         List<Fordon> test123 = databas.loadFordon(); //Tester xpdpxodpx
-       // for (Fordon vehicle : test123) { //Utskrift test1337
+        // for (Fordon vehicle : test123) { //Utskrift test1337
         //    System.out.println("TestBilar: " + vehicle);
-       // }
+        // }
         garage.setParkeradeBilar(test123);
     }
 }
