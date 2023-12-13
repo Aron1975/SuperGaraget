@@ -1,13 +1,10 @@
 package SuperGarage;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Bil implements Fordon{
 
     String regNr;
-    String owner;
-
     double pris = 70;
 
     LocalDate incheckningstid;
@@ -18,17 +15,12 @@ public class Bil implements Fordon{
     }
 
     @Override
-    public void skrivUtPrisPerDag() {
-        System.out.println("Bil: " + this.pris + "kr/dag");
-    }
-
-    @Override
     public String toString(){
         return ("Bil, " + this.regNr + ", " + incheckningstid);
     }
 
     @Override
-    public LocalDate getDate(){
+    public LocalDate getIncheckningstid(){
         return incheckningstid;
     }
 
@@ -36,7 +28,7 @@ public class Bil implements Fordon{
         return this.regNr;
     }
 
-    public double getPrice(){
+    public double getPris(){
         return this.pris;
     }
 }

@@ -1,6 +1,5 @@
 package SuperGarage;
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -12,28 +11,29 @@ public class GarageMain {
     LocalDate parkeringsDatum = LocalDate.now();
 
     public GarageMain() {
-        laddaFordon();
-        välkommenOchInfo();
-        garage.antalPlatserLediga();
-        String s = kundEllerAnställd();
-        if (s.equals("1")) {
-            kund();
-        } else if (s.equals("2")) {
-            anställd();
-        } else {
-            System.out.println("Om du inte är anställd eller kund, vänligen lämna området.");
+        try {
+            läsInFordon();
+            välkommenOchInfo();
+            garage.antalPlatserLediga();
+            String s = kundEllerAnställd();
+            if (s.equals("1")) {
+                kund();
+            } else if (s.equals("2")) {
+                anställd();
+            } else {
+                System.out.println("Om du inte är anställd eller kund, vänligen lämna området.");
+            }
+            databas.sparaFordon(garage.getParkeradeFordon());
+        }catch(Exception e){
+            databas.sparaFordon(garage.getParkeradeFordon());
+            System.out.println(e.getMessage());
+            System.exit(0);
         }
-        databas.saveFordon(garage.getParkeradeBilar());
-    }
-
-    public static void main(String[] args) {
-        GarageMain garageMain = new GarageMain();
     }
 
     public String kundEllerAnställd() {
         System.out.println("Är du anställd eller kund? \nSkriv:  \n- 1 för kund. \n- 2 för anställd.");
-        String aK = scan.nextLine().trim().toLowerCase();
-        return aK;
+        return scan.nextLine().trim().toLowerCase();
     }
 
     public void kund() {
@@ -51,8 +51,6 @@ public class GarageMain {
 
                     if (garage.checkaInFordon(fordonsTyp, regNr, parkeringsDatum) == null) {
                         System.out.println("Fordonet får inte parkera här.");
-                    } else {
-                        System.out.println("Välkommen in och parkera!");
                     }
 
                 } else {
@@ -65,7 +63,7 @@ public class GarageMain {
                 garage.skickaFaktura();
             } else if(inEllerUtFråga.equals("3")){
                 System.out.println("Adjöken!");
-                databas.saveFordon(garage.getParkeradeBilar());
+                databas.sparaFordon(garage.getParkeradeFordon());
                 System.exit(0);
             }
         }
@@ -76,26 +74,26 @@ public class GarageMain {
             System.out.println("Vad vill du göra? Ange: \n- 1 för att söka i databas eller\n- 2 för Checka in eller checka ut en kund" +
                     "\n- 3 för att skriva ut alla fordon" + " \n- 4 för att kontrollera parkeringstid."
                     + " \n- 5 för att stänga ner programmet.");
-            String sökEllerCheck = scan.nextLine().trim().toLowerCase();
+            String indataAnställd = scan.nextLine().trim().toLowerCase();
 
-            if (sökEllerCheck.equals("1")) {
+            if (indataAnställd.equals("1")) {
                 System.out.println("Vilket reg nr?");
                 String regNr = scan.nextLine().trim().toUpperCase();
                 int parkeringsPlats = garage.hittaFordon(regNr);
                 if (parkeringsPlats == -1) {
                     System.out.println("Bilen är inte parkerad här!");
                 } else {
-                    System.out.println(garage.getParkeradeBilar().get(parkeringsPlats).toString());
+                    System.out.println(garage.getParkeradeFordon().get(parkeringsPlats).toString());
                 }
-            } else if (sökEllerCheck.equals("2")) {
+            } else if (indataAnställd.equals("2")) {
                 kund();
-            } else if (sökEllerCheck.equals("3")) {
+            } else if (indataAnställd.equals("3")) {
                 garage.skrivUtIncheckadeBilar();
-            } else if (sökEllerCheck.equals("4")) {
+            } else if (indataAnställd.equals("4")) {
                 garage.kontrollerBegränsningParkeradeDagar();
-            } else if (sökEllerCheck.equals("5")) {
+            } else if (indataAnställd.equals("5")) {
                 System.out.println("Adjöken!");
-                databas.saveFordon(garage.getParkeradeBilar());
+                databas.sparaFordon(garage.getParkeradeFordon());
                 System.exit(0);
             }else {
                 System.out.println("Adjöken");
@@ -110,8 +108,12 @@ public class GarageMain {
                 "\n - Obemannat 16:00 - 23:59.");
     }
 
-    public void laddaFordon() {
-        List<Fordon> test123 = databas.loadFordon();
-        garage.setParkeradeBilar(test123);
+    public void läsInFordon() {
+        List<Fordon> test123 = databas.läsInFordon();
+        garage.setParkeradeFordon(test123);
+    }
+
+    public static void main(String[] args) {
+        GarageMain garageMain = new GarageMain();
     }
 }

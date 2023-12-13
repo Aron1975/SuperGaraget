@@ -1,8 +1,6 @@
 package SuperGarage;
 
-import java.time.Duration;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,11 +11,9 @@ public class Garage {
     private static final int antalParkeringsplatser = 20;
 
     private int antalParkeradeFordon = 0;
-
-    private boolean finnsPlats = false;
     private double totalPris = 0;
     private int maxTidParkering = 365;
-    private List<Fordon> parkeradeBilar = new ArrayList<>();
+    private List<Fordon> parkeradeFordon = new ArrayList<>();
 
     public Fordon checkaInFordon(String typ, String regNr, LocalDate parkeringsDatum) {
 
@@ -39,31 +35,32 @@ public class Garage {
         }
 
         if (f != null) {
-            System.out.println("Pris: " + f.getPrice() + " kr per dag.\n Skriv nej för avbryt");
+            System.out.println("Pris: " + f.getPris() + " kr per dag.\n Skriv nej för avbryt");
             String inputUser = scan.nextLine().trim().toLowerCase();
 
             if (inputUser.equals("nej")) {
                 System.out.println("Adjö");
+            } else {
+                System.out.println("Välkommen in och parkera!");
             }
-            parkeradeBilar.add(f);
+            parkeradeFordon.add(f);
             antalParkeradeFordon++;
         }
         return f;
     }
 
     public void checkaUtFordon(String regNr) {
-        Databas databas = new Databas();
         int bilPaPlats = hittaFordon(regNr);
         if (bilPaPlats == -1) {
             System.out.println("Bilen är inte parkerad här");
         }
-        totalPris = evaluatePrice(parkeradeBilar.get(bilPaPlats), kontrolleraParkeringstid(parkeradeBilar.get(bilPaPlats)));
-        parkeradeBilar.remove(bilPaPlats);
+        totalPris = beräknaPris(parkeradeFordon.get(bilPaPlats), kontrolleraParkeringstid(parkeradeFordon.get(bilPaPlats)));
+        parkeradeFordon.remove(bilPaPlats);
     }
 
     public int hittaFordon(String regNr) {
         int counter = 0;
-        for (Fordon f : parkeradeBilar) {
+        for (Fordon f : parkeradeFordon) {
             if (f.getRegNr().equals(regNr.toUpperCase())) {
                 return counter;
             }
@@ -74,12 +71,12 @@ public class Garage {
 
     public int kontrolleraParkeringstid(Fordon f) {
         LocalDate lD = LocalDate.now();
-        Period periods = Period.between(f.getDate(), lD);
+        Period periods = Period.between(f.getIncheckningstid(), lD);
         return periods.getDays();
     }
 
-    public double evaluatePrice(Fordon f, int antalDagar) {
-        return (f.getPrice() * antalDagar);
+    public double beräknaPris(Fordon f, int antalDagar) {
+        return (f.getPris() * antalDagar);
     }
 
     public void skickaFaktura() {
@@ -88,32 +85,27 @@ public class Garage {
     }
 
     public void skrivUtIncheckadeBilar() {
-        for (Fordon f : parkeradeBilar) {
+        for (Fordon f : parkeradeFordon) {
             System.out.println(f.toString());
         }
     }
 
     public boolean kontrolleraPlats() {
-        if (antalParkeradeFordon < antalParkeringsplatser) {
-            return true;
-        } else
-            return false;
+        return antalParkeradeFordon < antalParkeringsplatser;
     }
 
     public void antalPlatserLediga() {
         int ledigaPlatser = antalParkeringsplatser - antalParkeradeFordon;
         System.out.println("Antal lediga platser i Garaget: " + ledigaPlatser);
         System.out.println(" ");
-        ;
     }
 
-
-    public List<Fordon> getParkeradeBilar() { //La till dessa
-        return parkeradeBilar;
+    public List<Fordon> getParkeradeFordon() {
+        return parkeradeFordon;
     }
 
-    public void setParkeradeBilar(List<Fordon> parkeradeBilar) { //La till dessa
-        this.parkeradeBilar = parkeradeBilar;
+    public void setParkeradeFordon(List<Fordon> parkeradeFordon) {
+        this.parkeradeFordon = parkeradeFordon;
     }
 
     public int getMaxTidParkering() {
@@ -126,7 +118,7 @@ public class Garage {
         String svar = scan.nextLine();
         int i = hittaFordon(svar);
         if ( i != -1) {
-            int f = kontrolleraParkeringstid(getParkeradeBilar().get(i));
+            int f = kontrolleraParkeringstid(getParkeradeFordon().get(i));
             System.out.println("Kunden har parkerat: " + f + " dagar.");
             System.out.println("Kunden får stå parkerad totalt: " + (getMaxTidParkering() - f) + " dagar till.");
         }

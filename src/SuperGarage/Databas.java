@@ -8,20 +8,20 @@ import java.util.List;
 public class Databas {
     private final List<Fordon> parkeradeBilar = new ArrayList<>();
 
-    public void saveFordon(List<Fordon> parkeradeF) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/SuperGarage/bilar.txt"))) {
+    public void sparaFordon(List<Fordon> parkeradeF) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("src/SuperGarage/fordon.txt"))) {
             for (Fordon fordon : parkeradeF) {
                 writer.write(fordon.toString());
                 writer.newLine();
             }
         } catch (IOException e) {
-            System.out.println("Ödet var min väg");
+            System.out.println("Fel uppstod vid skrivning till fil.");
         }
     }
 
-    public List<Fordon> loadFordon() {
+    public List<Fordon> läsInFordon() {
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("src/SuperGarage/bilar.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("src/SuperGarage/fordon.txt"))) {
             String line;
             while ((line = reader.readLine()) != null) {
 
@@ -46,7 +46,7 @@ public class Databas {
 
             }
         } catch (IOException e) {
-            System.out.println("Sören life");
+            System.out.println("Fel inträffade vid läsning från fil.");
         }
 
         return parkeradeBilar;
