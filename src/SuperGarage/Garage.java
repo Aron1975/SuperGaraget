@@ -38,17 +38,16 @@ public class Garage {
             f = new Motorcykel(regNr, parkeringsDatum);
         }
 
+        if (f != null) {
+            System.out.println("Pris: " + f.getPrice() + " kr per dag.\n Skriv nej för avbryt");
+            String inputUser = scan.nextLine().trim().toLowerCase();
 
-        System.out.println("Pris: " + f.getPrice() + " kr per dag.\n Skriv nej för avbryt");
-        String inputUser = scan.nextLine().trim().toLowerCase();
-
-        if (inputUser.equals("nej")) {
-            System.out.println("Adjö");
-            System.exit(0);
+            if (inputUser.equals("nej")) {
+                System.out.println("Adjö");
+            }
+            parkeradeBilar.add(f);
+            antalParkeradeFordon++;
         }
-
-        parkeradeBilar.add(f);
-        antalParkeradeFordon++;
         return f;
     }
 
