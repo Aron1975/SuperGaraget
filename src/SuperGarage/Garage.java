@@ -52,10 +52,10 @@ public class Garage {
     }
 
     public void checkaUtFordon(String regNr) {
+        Databas databas = new Databas();
         int bilPaPlats = hittaFordon(regNr);
         if (bilPaPlats == -1) {
             System.out.println("Bilen är inte parkerad här");
-            System.exit(0);
         }
         totalPris = evaluatePrice(parkeradeBilar.get(bilPaPlats), kontrolleraParkeringstid(parkeradeBilar.get(bilPaPlats)));
         parkeradeBilar.remove(bilPaPlats);

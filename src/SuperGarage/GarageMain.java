@@ -65,6 +65,7 @@ public class GarageMain {
                 garage.skickaFaktura();
             } else if(inEllerUtFråga.equals("3")){
                 System.out.println("Adjöken!");
+                databas.saveFordon(garage.getParkeradeBilar());
                 System.exit(0);
             }
         }
@@ -94,6 +95,7 @@ public class GarageMain {
                 garage.kontrollerBegränsningParkeradeDagar();
             } else if (sökEllerCheck.equals("5")) {
                 System.out.println("Adjöken!");
+                databas.saveFordon(garage.getParkeradeBilar());
                 System.exit(0);
             }else {
                 System.out.println("Adjöken");
