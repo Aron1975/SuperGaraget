@@ -2,6 +2,7 @@ package SuperGarage;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -53,9 +54,10 @@ public class Garage {
         int bilPaPlats = hittaFordon(regNr);
         if (bilPaPlats == -1) {
             System.out.println("Bilen är inte parkerad här");
+        } else {
+            totalPris = beräknaPris(parkeradeFordon.get(bilPaPlats), kontrolleraParkeringstid(parkeradeFordon.get(bilPaPlats)));
+            parkeradeFordon.remove(bilPaPlats);
         }
-        totalPris = beräknaPris(parkeradeFordon.get(bilPaPlats), kontrolleraParkeringstid(parkeradeFordon.get(bilPaPlats)));
-        parkeradeFordon.remove(bilPaPlats);
     }
 
     public int hittaFordon(String regNr) {
@@ -71,8 +73,10 @@ public class Garage {
 
     public int kontrolleraParkeringstid(Fordon f) {
         LocalDate lD = LocalDate.now();
+        System.out.println(f.getIncheckningstid().toString());
         Period periods = Period.between(f.getIncheckningstid(), lD);
-        return periods.getDays();
+        long days = ChronoUnit.DAYS.between(f.getIncheckningstid(), lD);
+        return (int)days;
     }
 
     public double beräknaPris(Fordon f, int antalDagar) {
@@ -117,7 +121,7 @@ public class Garage {
         System.out.println("Vilken fordon vill du kontrollera? (Skriv in registreringsnummer)");
         String svar = scan.nextLine();
         int i = hittaFordon(svar);
-        if ( i != -1) {
+        if (i != -1) {
             int f = kontrolleraParkeringstid(getParkeradeFordon().get(i));
             System.out.println("Kunden har parkerat: " + f + " dagar.");
             System.out.println("Kunden får stå parkerad totalt: " + (getMaxTidParkering() - f) + " dagar till.");
