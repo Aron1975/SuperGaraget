@@ -2,12 +2,12 @@ package SuperGarage;
 
 import java.time.LocalDate;
 
-public class Bat implements Fordon{
+public class Bat implements Fordon {
 
-    private String regNr;
-    private double pris = 100;
+    private final String regNr;
+    private final double pris = 100;
 
-    private LocalDate incheckningstid;
+    private final LocalDate incheckningstid;
 
     public Bat(String regNr, LocalDate incheckningstid) {
         this.regNr = regNr;
@@ -15,20 +15,20 @@ public class Bat implements Fordon{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return ("Båt, " + this.regNr + ", " + incheckningstid);
     }
 
     @Override
-    public LocalDate getIncheckningstid(){
+    public LocalDate getIncheckningstid() {
         return incheckningstid;
     }
 
-    public String getRegNr(){
+    public String getRegNr() {
         return this.regNr;
     }
 
-    public double getPris(){
+    public double getPris() {
         return this.pris;
     }
 }

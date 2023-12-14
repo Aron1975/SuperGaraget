@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GarageMain {
-    private Garage garage = new Garage();
-    private Databas databas = new Databas();
-    private Scanner scan = new Scanner(System.in);
-    private LocalDate parkeringsDatum = LocalDate.now();
+    private final Garage garage = new Garage();
+    private final Databas databas = new Databas();
+    private final Scanner scan = new Scanner(System.in);
+    private final LocalDate parkeringsDatum = LocalDate.now();
 
     public GarageMain() {
         try {
@@ -29,6 +29,10 @@ public class GarageMain {
             System.out.println(e.getMessage());
             System.exit(0);
         }
+    }
+
+    public static void main(String[] args) {
+        GarageMain garageMain = new GarageMain();
     }
 
     public String kundEllerAnställd() {
@@ -111,9 +115,5 @@ public class GarageMain {
     public void läsInFordon() {
         List<Fordon> test123 = databas.läsInFordon();
         garage.setParkeradeFordon(test123);
-    }
-
-    public static void main(String[] args) {
-        GarageMain garageMain = new GarageMain();
     }
 }

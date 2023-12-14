@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public interface Fordon {
 
-    public String toString();
+    String toString();
 
-    public LocalDate getIncheckningstid();
+    LocalDate getIncheckningstid();
 
-    public String getRegNr();
+    String getRegNr();
 
-    public double getPris();
+    double getPris();
 }

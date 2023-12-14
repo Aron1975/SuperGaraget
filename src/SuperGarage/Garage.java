@@ -12,7 +12,7 @@ public class Garage {
 
     private int antalParkeradeFordon = 0;
     private double totalPris = 0;
-    private int maxTidParkering = 365;
+    private final int maxTidParkering = 365;
     private List<Fordon> parkeradeFordon = new ArrayList<>();
 
     public Fordon checkaInFordon(String typ, String regNr, LocalDate parkeringsDatum) {
@@ -117,7 +117,7 @@ public class Garage {
         System.out.println("Vilken fordon vill du kontrollera? (Skriv in registreringsnummer)");
         String svar = scan.nextLine();
         int i = hittaFordon(svar);
-        if ( i != -1) {
+        if (i != -1) {
             int f = kontrolleraParkeringstid(getParkeradeFordon().get(i));
             System.out.println("Kunden har parkerat: " + f + " dagar.");
             System.out.println("Kunden får stå parkerad totalt: " + (getMaxTidParkering() - f) + " dagar till.");
