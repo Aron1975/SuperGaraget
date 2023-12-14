@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class Motorcykel implements Fordon{
 
-    String regNr;
-    double pris = 50;
+    private String regNr;
+    private double pris = 50;
 
-    LocalDate incheckningstid;
+    private LocalDate incheckningstid;
 
     public Motorcykel(String regNr, LocalDate incheckningstid) {
         this.regNr = regNr;

@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class Moped implements Fordon{
 
-    String regNr;
-    double pris = 20;
+    private String regNr;
+    private double pris = 20;
 
-    LocalDate incheckningstid;
+    private LocalDate incheckningstid;
 
     public Moped(String regNr, LocalDate incheckningstid) {
         this.regNr = regNr;

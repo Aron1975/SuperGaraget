@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class Bil implements Fordon{
 
-    String regNr;
-    double pris = 70;
+    private String regNr;
+    private double pris = 70;
 
-    LocalDate incheckningstid;
+    private LocalDate incheckningstid;
 
     public Bil(String regNr, LocalDate incheckningstid) {
         this.regNr = regNr;

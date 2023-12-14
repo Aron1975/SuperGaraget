@@ -4,10 +4,10 @@ import java.time.LocalDate;
 
 public class Bat implements Fordon{
 
-    String regNr;
-    double pris = 100;
+    private String regNr;
+    private double pris = 100;
 
-    LocalDate incheckningstid;
+    private LocalDate incheckningstid;
 
     public Bat(String regNr, LocalDate incheckningstid) {
         this.regNr = regNr;
