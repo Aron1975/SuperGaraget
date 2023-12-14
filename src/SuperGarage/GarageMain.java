@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GarageMain {
-    Garage garage = new Garage();
-    Databas databas = new Databas();
-    Scanner scan = new Scanner(System.in);
-    LocalDate parkeringsDatum = LocalDate.now();
+    private Garage garage = new Garage();
+    private Databas databas = new Databas();
+    private Scanner scan = new Scanner(System.in);
+    private LocalDate parkeringsDatum = LocalDate.now();
 
     public GarageMain() {
         try {
@@ -24,7 +24,7 @@ public class GarageMain {
                 System.out.println("Om du inte är anställd eller kund, vänligen lämna området.");
             }
             databas.sparaFordon(garage.getParkeradeFordon());
-        }catch(Exception e){
+        } catch (Exception e) {
             databas.sparaFordon(garage.getParkeradeFordon());
             System.out.println(e.getMessage());
             System.exit(0);
@@ -61,7 +61,7 @@ public class GarageMain {
                 String regNr = scan.nextLine();
                 garage.checkaUtFordon(regNr);
                 garage.skickaFaktura();
-            } else if(inEllerUtFråga.equals("3")){
+            } else if (inEllerUtFråga.equals("3")) {
                 System.out.println("Adjöken!");
                 databas.sparaFordon(garage.getParkeradeFordon());
                 System.exit(0);
@@ -95,7 +95,7 @@ public class GarageMain {
                 System.out.println("Adjöken!");
                 databas.sparaFordon(garage.getParkeradeFordon());
                 System.exit(0);
-            }else {
+            } else {
                 System.out.println("Adjöken");
             }
         }
