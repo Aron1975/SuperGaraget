@@ -13,7 +13,7 @@ public class Garage {
 
     private int antalParkeradeFordon = 0;
     private double totalPris = 0;
-    private int maxTidParkering = 365;
+    private final int maxTidParkering = 365;
     private List<Fordon> parkeradeFordon = new ArrayList<>();
 
     public Fordon checkaInFordon(String typ, String regNr, LocalDate parkeringsDatum) {

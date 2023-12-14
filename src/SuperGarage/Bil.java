@@ -2,12 +2,12 @@ package SuperGarage;
 
 import java.time.LocalDate;
 
-public class Bil implements Fordon{
+public class Bil implements Fordon {
 
-    private String regNr;
-    private double pris = 70;
+    private final String regNr;
+    private final double pris = 70;
 
-    private LocalDate incheckningstid;
+    private final LocalDate incheckningstid;
 
     public Bil(String regNr, LocalDate incheckningstid) {
         this.regNr = regNr;
@@ -15,20 +15,20 @@ public class Bil implements Fordon{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return ("Bil, " + this.regNr + ", " + incheckningstid);
     }
 
     @Override
-    public LocalDate getIncheckningstid(){
+    public LocalDate getIncheckningstid() {
         return incheckningstid;
     }
 
-    public String getRegNr(){
+    public String getRegNr() {
         return this.regNr;
     }
 
-    public double getPris(){
+    public double getPris() {
         return this.pris;
     }
 }
