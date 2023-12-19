@@ -3,7 +3,7 @@ package SuperGarage;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
-//Comment
+
 public class GarageMain {
     private final Garage garage = new Garage();
     private final Databas databas = new Databas();
