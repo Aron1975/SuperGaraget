@@ -1,7 +1,6 @@
 package SuperGarage;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +10,7 @@ public class Garage {
 
     private static final int antalParkeringsplatser = 20;
 
-    private int antalParkeradeFordon = 0;
+    private int antalParkeradeFordon;
     private double totalPris = 0;
     private final int maxTidParkering = 365;
     private List<Fordon> parkeradeFordon = new ArrayList<>();
@@ -74,7 +73,6 @@ public class Garage {
     public int kontrolleraParkeringstid(Fordon f) {
         LocalDate lD = LocalDate.now();
         System.out.println(f.getIncheckningstid().toString());
-        Period periods = Period.between(f.getIncheckningstid(), lD);
         long days = ChronoUnit.DAYS.between(f.getIncheckningstid(), lD);
         return (int)days;
     }
@@ -110,6 +108,7 @@ public class Garage {
 
     public void setParkeradeFordon(List<Fordon> parkeradeFordon) {
         this.parkeradeFordon = parkeradeFordon;
+        this.antalParkeradeFordon = parkeradeFordon.size();
     }
 
     public int getMaxTidParkering() {

@@ -113,7 +113,7 @@ public class GarageMain {
     }
 
     public void läsInFordon() {
-        List<Fordon> test123 = databas.läsInFordon();
-        garage.setParkeradeFordon(test123);
+        List<Fordon> tempLista = databas.läsInFordon();
+        garage.setParkeradeFordon(tempLista);
     }
 }
